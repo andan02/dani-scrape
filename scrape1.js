@@ -63,7 +63,14 @@ let accept_it = async () => {
   const linkHandlers = await page.$x("//a[contains(text(), 'Accept')]");
 
   if (linkHandlers.length > 0) {
-    await linkHandlers[1].click();
+      for (let n = 0; n < linkHandlers.length; n++) {
+          try {
+              await linkHandlers[n].click();
+          } catch (error) {
+              // console.log(error);
+              continue;
+          }
+      }
   } else {
     throw new Error("Link not found");
   }
