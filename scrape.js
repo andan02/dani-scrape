@@ -1,10 +1,11 @@
 const puppeteer = require('puppeteer');
+const CREDS = require('./creds');
 
 let scrape = async () => {
     const browser = await puppeteer.launch({headless: false});
     page = await browser.newPage();
-    const email = "wiesenpieps@gmail.com";
-    const pass = "sunshine81";
+    const email = CREDS.username;
+    const pass = CREDS.password;
 
     const navigationPromise = page.waitForNavigation()
     await page.goto('https://translator.stepes.com/stepes-check-jobs.html');
