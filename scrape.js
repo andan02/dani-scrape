@@ -67,7 +67,7 @@ let accept_it = async () => {
 
   try {
       await page.click('#message_bottom > button.first\n');
-      return('GOT ONE!!!!');
+      return('!');
   } catch (error) {
     return('.');
   }
@@ -85,6 +85,6 @@ scrape().then(function (value) {
 let i = 0;
 setInterval(function() {
   accept_it().then(function(value) {
-    console.log(value);
+    process.stdout.write(value);
   });
 }, 10000);
