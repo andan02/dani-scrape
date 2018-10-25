@@ -15,9 +15,9 @@ let scrape = async () => {
 
     await navigationPromise;
     await page.waitForSelector('#form_translator > div.signbox > div.sig-part-2 > div:nth-child(2) > input[type="text"]',{ visible: true });
-    await page.evaluate((email, pass) => {
-      document.querySelector('#form_translator > div.signbox > div.sig-part-2 > div:nth-child(2) > input[type="text"]').value = email;
-      document.querySelector('#form_translator > div.signbox > div.sig-part-2 > div:nth-child(3) > input[type="password"]').value = pass;
+    await page.evaluate(function(email, pass) {
+        document.querySelector('#form_translator > div.signbox > div.sig-part-2 > div:nth-child(2) > input[type="text"]').value = email;
+        document.querySelector('#form_translator > div.signbox > div.sig-part-2 > div:nth-child(3) > input[type="password"]').value = pass;
     }, email, pass);
 
     // await page.waitForSelector('#login_submit',{ visible: true });
@@ -32,6 +32,7 @@ let scrape = async () => {
     await page.click('#login_submit');
     await page.click('#login_submit');
     await navigationPromise;
+
     await page.waitForSelector('body > div > aside > div > nav > ul > li.currentclass > a > span');
     await page.click('body > div > aside > div > nav > ul > li.currentclass > a > span');
     await navigationPromise;
@@ -86,7 +87,13 @@ scrape().then(function (value) {
 
 let i = 0;
 setInterval(function() {
-  accept_it().then(function(value) {
-    process.stdout.write(value);
-  });
+    i++;
+    var z = i % 60;
+    accept_it().then(function(value) {
+        if(z == 0) {
+            console.log('');
+        } else {
+            process.stdout.write(value);
+        }
+    });
 }, 10000);
