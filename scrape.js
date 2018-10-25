@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const CREDS = require('./creds');
 
+
 let scrape = async () => {
     const browser = await puppeteer.launch({headless: false});
     page = await browser.newPage();
