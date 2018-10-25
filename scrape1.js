@@ -66,6 +66,11 @@ let accept_it = async () => {
       for (let n = 0; n < linkHandlers.length; n++) {
           try {
               await linkHandlers[n].click();
+              try {
+                  await page.click('#message_bottom > button.first\n');
+              } catch (error) {
+                  continue;
+              }
           } catch (error) {
               // console.log(error);
               continue;
