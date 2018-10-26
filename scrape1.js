@@ -60,6 +60,7 @@ let scrape = async () => {
 let accept_it = async () => {
   await page.reload();
   await page.waitForSelector('body > div > section > div > div.head-title-new');
+
   const linkHandlers = await page.$x("//a[contains(text(), 'Accept')]");
 
   if (linkHandlers.length > 0) {
@@ -79,6 +80,7 @@ let accept_it = async () => {
       }
   } else {
     throw new Error("Link not found");
+    await page.goBack();
   }
 
   try {
